@@ -1,15 +1,17 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import {Provider, useSelector} from 'react-redux';
+import {Provider} from 'react-redux';
 import {store} from './src/redux/store';
-import UserScreen from './screens/UserScreen';
 import MainScreen from './screens/MainScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import {ApiProvider} from '@reduxjs/toolkit/query/react';
+import {api} from './src/redux/api/apiSlice';
 
 const App = () => {
-  
   return (
     <Provider store={store}>
-      <MainScreen />
+      <NavigationContainer>
+        <MainScreen />
+      </NavigationContainer>
     </Provider>
   );
 };

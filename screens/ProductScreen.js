@@ -2,10 +2,12 @@ import React from 'react';
 import {View, Text, FlatList, Button} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {addProduct, removeProduct} from '../src/redux/features/productSlice';
-
+import {useNavigation} from '@react-navigation/native';
+import {placeOrder} from '../src/redux/features/orderSlice';
 const ProductScreen = () => {
   const products = useSelector(state => state.product.items);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const newProduct = {
     id: Math.random().toString(),
     name: 'New Product',
@@ -47,6 +49,10 @@ const ProductScreen = () => {
       <Button
         title="Add Product"
         onPress={() => dispatch(addProduct(newProduct))}
+      />
+      <Button
+        title="Go to Orders"
+        onPress={() => navigation.navigate('OrderScreen')}
       />
     </View>
   );
