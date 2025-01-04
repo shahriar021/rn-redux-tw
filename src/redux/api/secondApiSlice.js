@@ -7,7 +7,24 @@ export const secondApi = createApi({
     getUsers: builder.query({
       query: () => '/users',
     }),
+
+    createUser: builder.mutation({
+      query: newData => ({
+        url: '/users',
+        method: 'post',
+        body: newData,
+      }),
+    }),
+
+    updateUser: builder.mutation({
+      query: newData => ({
+        url: `/users/${newData.id}`,
+        method: 'put',
+        body: newData,
+      }),
+    }),
   }),
 });
 
-export const {useGetUsersQuery} = secondApi;
+export const {useGetUsersQuery, useCreateUserMutation, useUpdateUserMutation} =
+  secondApi;

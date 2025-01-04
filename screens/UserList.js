@@ -1,13 +1,23 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import {View, Text, FlatList} from 'react-native';
+import {useGetUsersQuery} from '../src/redux/api/secondApiSlice';
 
 const UserList = () => {
-    const {data:}
+  const {data: users, error, isLoading} = useGetUsersQuery();
   return (
-    <View>
-      <Text></Text>
-    </View>
+    <FlatList
+      data={users}
+      keyExtractor={item => item.id.toString()}
+      renderItem={({item}) => {
+        return (
+          <View>
+            <Text style={{fontSize: 30}}>{item.name}</Text>
+            <Text style={{fontSize: 15}}>{item.email}</Text>
+          </View>
+        );
+      }}
+    />
   );
-}
+};
 
 export default UserList;
